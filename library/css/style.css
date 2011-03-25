@@ -207,6 +207,14 @@ nav{
 	padding: 10px;
 }
 
+#popup{
+	position: absolute;
+	background-color: white;
+	border: solid #ddd 1px;
+	width: 300px;
+	height: 100px;
+	padding: 10px;
+}
 
 
 
