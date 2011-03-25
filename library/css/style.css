@@ -192,8 +192,10 @@ footer{
 	padding: 5px;
 }
 
-#main div{
+#content{
 	padding: 10px;
+	float: left;
+	width: 800px;
 }
 
 nav{
@@ -204,19 +206,6 @@ nav{
 	margin-right: 10px;
 	padding: 10px;
 }
-
-#main.div{
-	float: left;
-}
-
-
-
-
-
-
-
-
-
 
 
 
