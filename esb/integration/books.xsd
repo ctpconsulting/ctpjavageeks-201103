@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ctpjavageeks.org/books" xmlns:tns="http://ctpjavageeks.org/books" elementFormDefault="qualified">
+
+    <simpleType name="BookState">
+        <restriction base="string">
+            <enumeration value="AVAILABLE" />
+            <enumeration value="RESERVED" />
+            <enumeration value="BORROWED" />
+        </restriction>
+    </simpleType>
+
+    <complexType name="Author">
+        <sequence>
+            <element name="name" type="string" />
+            <element name="twitter" type="string" />
+        </sequence>
+    </complexType>
+    
+    <complexType name="Book">
+        <sequence>
+            <element name="title" type="string" />
+            <element name="isbn" type="string" />
+            <element name="author" type="tns:Author" />
+            <element name="description" type="string" />
+            <element name="state" type="tns:BookState" />
+            <element name="borrower" type="string" minOccurs="0" />
+        </sequence>
+    </complexType>
+    
+    <complexType name="BookList">
+        <sequence>
+            <element name="book" type="tns:Book" maxOccurs="unbounded" />
+        </sequence>
+    </complexType>
+    
+    <element name="book" type="tns:Book" />
+    <element name="bookList" type="tns:BookList" />
+
+</schema>
