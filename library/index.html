@@ -19,12 +19,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-  <link rel="shortcut icon" href="img/ctp-logo.ico">
-  <link rel="apple-touch-icon" href="img/ctp-logo.ico">
+  <link rel="shortcut icon" href="images/ctp-logo.ico">
+  <link rel="apple-touch-icon" href="images/ctp-logo.ico">
 
 
   <!-- CSS: implied media="all" -->
   <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="stylesheet" href="css/dark-hive/jquery-ui-1.8.11.custom.css" type="text/css">
+  <link rel="stylesheet" href="css/demo_table_jui.css" type="text/css">
 
   <!-- Uncomment if you are specifically targeting less enabled mobile browsers
   <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
@@ -38,11 +40,31 @@
 
   <div id="container">
     <header>
-		<img src="img/logo_ctp.png" />
+		<img src="images/logo_ctp.png" />
     </header>
     <div id="main" role="main">
 		<nav>navigation</nav>
-		<div>Hello World :-)</div>
+		<div id="content">
+			<table cellspacing="0" cellpadding="0" border="0" id="example" class="display">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>ISBN</th>
+			<th>Author</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+	</tbody>
+	<tfoot>
+		<tr>
+			<th>Title</th>
+			<th>ISBN</th>
+			<th>Author</th>
+		</tr>
+	</tfoot>
+</table>
+		</div>
 		
     </div>
     <footer>
@@ -59,6 +81,8 @@
 
 
   <!-- scripts concatenated and minified via ant build script-->
+  <script src="js/libs/jquery-ui-1.8.11.custom.min.js"></script>
+  <script src="js/libs/jquery.dataTables.min.js"></script>
   <script src="js/plugins.js"></script>
   <script src="js/script.js"></script>
   <!-- end scripts-->

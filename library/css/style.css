@@ -192,8 +192,10 @@ footer{
 	padding: 5px;
 }
 
-#main div{
+#content{
 	padding: 10px;
+	float: left;
+	width: 800px;
 }
 
 nav{
@@ -205,19 +207,14 @@ nav{
 	padding: 10px;
 }
 
-#main.div{
-	float: left;
+#popup{
+	position: absolute;
+	background-color: white;
+	border: solid #ddd 1px;
+	width: 300px;
+	height: 100px;
+	padding: 10px;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
