@@ -1,5 +1,9 @@
-package com.ctp.library.android;
+package com.ctp.library.android.activity;
 
+
+import com.ctp.library.android.R;
+import com.ctp.library.android.R.id;
+import com.ctp.library.android.R.layout;
 
 import android.app.Activity;
 import android.content.Intent;
