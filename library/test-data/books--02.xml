@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book cover="nice book cover">
+  <title>title</title>
+  <isbn>isbn</isbn>
+  <author>
+    <name>name</name>
+    <twitter>twitter</twitter>
+  </author>
+  <description>description</description>
+  <state>AVAILABLE</state>
+  <borrower>borrower</borrower>
+</book>

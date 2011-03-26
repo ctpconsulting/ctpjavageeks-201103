@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:book xmlns:tns="http://ctpjavageeks.org/books" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ctpjavageeks.org/books http://thunder.local/books.xsd">
+  <tns:title>tns:title</tns:title>
+  <tns:isbn>tns:isbn</tns:isbn>
+  <tns:author>
+    <tns:name>tns:name</tns:name>
+    <tns:twitter>tns:twitter</tns:twitter>
+  </tns:author>
+  <tns:description>tns:description</tns:description>
+  <tns:state>AVAILABLE</tns:state>
+  <tns:borrower>tns:borrower</tns:borrower>
+</tns:book>
