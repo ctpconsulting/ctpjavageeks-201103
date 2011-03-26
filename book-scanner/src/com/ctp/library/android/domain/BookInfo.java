@@ -1,7 +1,9 @@
 package com.ctp.library.android.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -22,6 +24,9 @@ public class BookInfo {
 	private List<Publisher> publishers = new ArrayList<Publisher>();
 
 	private List<Author> authors = new ArrayList<Author>();
+	
+	@SerializedName("cover")
+	private Map<String,String> coverUrls = new HashMap<String, String>();
 	
 	public BookInfo() {
 	}
@@ -77,6 +82,30 @@ public class BookInfo {
 	public void setAuthors(List<Author> authors) {
 		this.authors = authors;
 	}
+
+	public Map<String, String> getCoverUrls() {
+		return coverUrls;
+	}
+
+	public void setCoverUrls(Map<String, String> coverUrls) {
+		this.coverUrls = coverUrls;
+	}
 	
+	public String getCoverUrl(CoverSize size) {
+		return coverUrls.get(size.key);
+	}
+	
+	public static enum CoverSize {
+		SMALL("small"),
+		MEDIUM("medium"),
+		LARGE("large");
+		
+		private final String key;
+
+		private CoverSize(String key) {
+			this.key = key;
+		}
+		
+	}
 	
 }
