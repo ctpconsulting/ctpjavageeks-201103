@@ -45,7 +45,7 @@ $(document).ready(function() {
 		}
 	);
      */
-     alert('ad');
+
     getBooks();
     
 } );

@@ -12,7 +12,7 @@ $.ajaxSetup({
 
 	 var result =  $.ajax( {
 			type:'Get',
-			url:'http://thunder.local/test-data/books.xml',
+			url:'http://ctpgeeks.biteme.ch/test-data/books.xml',
 			success:parseNewXML,
 			error:parsePersistentXML
 	  });
