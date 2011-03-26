@@ -9,9 +9,9 @@ import com.ctp.library.android.service.OpenLibraryBookFetcher;
 public class OpenLibraryIsbnFetcherIntegrationTest extends TestCase {
 	
 	
-	public void testShouldFetchBookInfoFromOpenLibraryForValidISBN() throws Exception {
+	public void testShouldFetchBookInfoFromOpenLibraryForEffectiveJava() throws Exception {
 		// given
-		String isbn = "9780679790730";
+		String isbn = "9780321356680";
 		BookFetcher fetcher = new OpenLibraryBookFetcher();
 
 		// when

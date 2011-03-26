@@ -14,10 +14,12 @@ import com.ctp.library.android.domain.BookInfo;
 
 public class OpenLibraryBookFetcher implements BookFetcher {
 
+	private static final String OPEN_LIBRARY_RETRIEVE_BY_ISBN_IN_JSON_URL = "http://openlibrary.org/api/books?bibkeys=ISBN:%s&format=json";
+	
 	@Override
 	public BookInfo fetch(String isbn) {
 		BookInfo result = BookInfo.UNKNOWN_BOOK;
-		HttpGet get = new HttpGet("http://openlibrary.org/api/books?bibkeys=ISBN:9780679790730");
+		HttpGet get = new HttpGet(String.format(OPEN_LIBRARY_RETRIEVE_BY_ISBN_IN_JSON_URL, isbn));
 		DefaultHttpClient client = new DefaultHttpClient();
 		try {
 			HttpResponse response = client.execute(get);
@@ -37,7 +39,7 @@ public class OpenLibraryBookFetcher implements BookFetcher {
 		private final String isbn;
 
 		public BookInfoResponse(String response) throws JSONException {
-			super(extractJson(response));
+			super(response);
 			this.isbn = extractISBN(); 
 		}
 
@@ -46,10 +48,6 @@ public class OpenLibraryBookFetcher implements BookFetcher {
 			return isbnKey.substring(isbnKey.indexOf(":") + 1);
 		}
 
-		private static String extractJson(String json) {
-			return json.substring(json.indexOf("{"));
-		}
-		
 		public static BookInfo fromJSON(String json) throws JSONException {
 			BookInfoResponse bookInfoResponse = new BookInfoResponse(json);
 			return new BookInfo(bookInfoResponse.isbn);
