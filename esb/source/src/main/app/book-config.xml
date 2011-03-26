@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:jersey="http://www.mulesoft.org/schema/mule/jersey"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.0/mule.xsd
+    http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/jersey/3.0/mule-jersey.xsd
+    http://jersey.apache.org/core http://jersey.apache.org/schemas/core.xsd">
+
+	<flow name="HelloWorld">
+		<inbound-endpoint address="http://localhost:8080/jersey" exchange-pattern="request-response">
+			<not-filter>
+				<wildcard-filter pattern="/favicon.ico" />
+			</not-filter>
+		</inbound-endpoint>
+		<jersey:resources>
+			<component class="ctp.book.rest.service.BookResource" />
+		</jersey:resources>
+
+		<component class="ctp.book.rest.service.Test" />
+		
+	</flow>
+</mule>
