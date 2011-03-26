@@ -1,31 +1,30 @@
 package com.ctp.library.android.activity;
 
-
-import com.ctp.library.android.R;
-import com.ctp.library.android.R.id;
-import com.ctp.library.android.R.layout;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.TextView;
+
+import com.ctp.library.android.R;
+import com.ctp.library.android.domain.BookInfo;
+import com.ctp.library.android.service.OpenLibraryBookFetcher;
 
 public class BookScannerActivity extends Activity {
-	private EditText text;
+	
+	private TextView text;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		text = (EditText) findViewById(R.id.editText1);
+		text = (TextView) findViewById(R.id.content);
 
 	}
 
 	public void scanButtonClickHandler(View view) {
-		text = (EditText) findViewById(R.id.editText1);
-		Intent intent = new Intent("com.google.zxing.client.android.SCAN");
-		intent.putExtra("com.google.zxing.client.android.SCAN.SCAN_MODE", "QR_CODE_MODE");
+		text = (TextView) findViewById(R.id.content);
+		Intent intent = ZxingIntentFactory.scanBarcode();
 		startActivityForResult(intent, 0);
 	}
 
@@ -33,12 +32,18 @@ public class BookScannerActivity extends Activity {
 		if (requestCode == 0) {
 			if (resultCode == RESULT_OK) {
 				String scanResult = intent.getStringExtra("SCAN_RESULT");
-				text.setText(scanResult);
+				BookInfo bookInfo = fetchBook(scanResult);
+				text.setText(bookInfo.getIsbn());
 			} else if (resultCode == RESULT_CANCELED) {
-				// Handle cancel
 				text.setText("RESULT CANCELED");
 			}
 		}
+	}
+
+	private BookInfo fetchBook(String scannedInput) {
+		OpenLibraryBookFetcher bookFetcher = new OpenLibraryBookFetcher();
+		BookInfo bookInfo = bookFetcher.fetch(scannedInput);
+		return bookInfo;
 	}
 
 }
