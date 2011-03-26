@@ -7,7 +7,7 @@ import com.ctp.library.android.service.OpenLibraryBookFetcher;
 
 import junit.framework.TestCase;
 
-public class OpenLibraryIsbnFetcherlIntegrationTest extends TestCase {
+public class OpenLibraryIsbnFetcherIntegrationTest extends TestCase {
 	
 	
 	public void testShouldFetchBookInfoFromOpenLibraryForValidISBN() throws Exception {
