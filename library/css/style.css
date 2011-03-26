@@ -207,7 +207,7 @@ nav{
 	padding: 10px;
 }
 
-#popup{
+.popup{
 	position: absolute;
 	background-color: white;
 	border: solid #ddd 1px;
