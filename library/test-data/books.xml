@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookList>
+  <book>
+    <title>I like HTML 5</title>
+    <isbn>isbn1</isbn>
+    <author>
+      <name>Phuong</name>
+      <twitter>twitter 1</twitter>
+    </author>
+    <description>great book</description>
+    <state>AVAILABLE</state>
+    <borrower>borrower 1</borrower>
+  </book>
+  <book>
+    <title>I also like HTML 5</title>
+    <isbn>isbn2</isbn>
+    <author>
+      <name>Stefan</name>
+      <twitter>stefanmalaer</twitter>
+    </author>
+    <description>description 2</description>
+    <state>AVAILABLE</state>
+    <borrower>borrower 2</borrower>
+  </book>
+  <book>
+    <title>I like jQuery</title>
+    <isbn>isbn3</isbn>
+    <author>
+      <name>Andreas</name>
+      <twitter>twitter 3</twitter>
+    </author>
+    <description>description</description>
+    <state>AVAILABLE</state>
+    <borrower>borrower 3</borrower>
+  </book>
+  <book>
+    <title>I like both</title>
+    <isbn>isbn4</isbn>
+    <author>
+      <name>Liker</name>
+      <twitter>twitter 4</twitter>
+    </author>
+    <description>description 4</description>
+    <state>AVAILABLE</state>
+    <borrower>borrower 4</borrower>
+  </book>
+  <book>
+    <title>I hate all</title>
+    <isbn>isbn5</isbn>
+    <author>
+      <name>Hater</name>
+      <twitter>twitter 5</twitter>
+    </author>
+    <description>description 5</description>
+    <state>BORROWED</state>
+    <borrower>Kudi</borrower>
+  </book>
+</bookList>
