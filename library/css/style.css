@@ -192,6 +192,19 @@ footer{
 	padding: 5px;
 }
 
+footer a:link{
+	color: #ffffff;
+}
+
+footer a:hover{
+	color: #bbbbbb !important;
+}
+
+footer a:visited{
+	color: #ffffff;
+}
+
+
 #content{
 	padding: 10px;
 	float: left;
