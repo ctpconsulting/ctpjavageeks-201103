@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : testcase_checkout.xml
+    Created on : November 2, 2009, 1:53 PM
+    Author     : edewit
+    Description:
+        Purpose of the document follows.
+-->
+
+<dataset>
+   <checkOut/>
+   <book id="1" isbn="9780596001582"/>
+</dataset>
