@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Book Scanner</string>
+	<color name="backgroundColor">#3399CC</color>
+	<string name="scanButtonClickHandler">scanButtonClickHandler</string>
+	<string name="scanButton">Scan now</string>
+</resources>
