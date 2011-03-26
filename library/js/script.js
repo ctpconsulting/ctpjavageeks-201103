@@ -26,11 +26,16 @@ $(document).ready(function() {
 		"2.5"  ,
 		"2.6" 
 			] ];
-	*/
 	
-	booksRaw = getBooks();
+	alert(getBooks());
+	booksRaw = parseXML(getBooks());
 	
-	
+	$(booksRaw).each(function (k,v) {
+		alert("1");
+	 	$('#main').append('<div class="book2">'+v[0]+'</div>');
+    });
+    
+        
 	$.each(
 		booksRaw,
 		function( intIndex, row ){
@@ -39,11 +44,13 @@ $(document).ready(function() {
 	
 		}
 	);
-	
-	
-	
-	
+     */
+     alert('ad');
+    getBooks();
+    
 } );
+
+
 
 
 function addRow(row){
@@ -55,18 +62,18 @@ function addRow(row){
 
 
 function addPopup(element,isbn){
-	if($("#"+isbn).length == 0){
+	if($(".popup").length == 0){
 		$("#content").append("<div id='"+isbn+"' class='popup'> Title: " 
 			+ booksList[isbn][0] 
-			+ "</br>ISBN: "
+			+ "<br/>ISBN: "
 			+ booksList[isbn][1]
-			+ "</br>Author: "
+			+ "<br/>Author: "
 			+ booksList[isbn][2]
-			+ "</br>description: "
+			+ "<br/>description: "
 			+ booksList[isbn][3] 
-			+ "</br>state: "
+			+ "<br/>state: "
 			+ booksList[isbn][4]  
-			+ "</br>borrower: "
+			+ "<br/>borrower: "
 			+ booksList[isbn][5]  
 			+"</div>");
 		popup = $("#"+isbn);
