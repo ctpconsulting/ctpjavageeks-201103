@@ -1,5 +1,8 @@
 package com.ctp.library.android.service;
 
+import java.lang.reflect.Type;
+import java.util.Map;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
@@ -11,10 +14,12 @@ import org.json.JSONObject;
 import android.util.Log;
 
 import com.ctp.library.android.domain.BookInfo;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 public class OpenLibraryBookFetcher implements BookFetcher {
 
-	private static final String OPEN_LIBRARY_RETRIEVE_BY_ISBN_IN_JSON_URL = "http://openlibrary.org/api/books?bibkeys=ISBN:%s&format=json";
+	private static final String OPEN_LIBRARY_RETRIEVE_BY_ISBN_IN_JSON_URL = "http://openlibrary.org/api/books?bibkeys=ISBN:%s&format=json&jscmd=data";
 	
 	@Override
 	public BookInfo fetch(String isbn) {
@@ -49,8 +54,9 @@ public class OpenLibraryBookFetcher implements BookFetcher {
 		}
 
 		public static BookInfo fromJSON(String json) throws JSONException {
-			BookInfoResponse bookInfoResponse = new BookInfoResponse(json);
-			return new BookInfo(bookInfoResponse.isbn);
+			Type bookInfoMapTokenType = new TypeToken<Map<String,BookInfo>>() {}.getType();
+			Map<String,BookInfo> fromJson = new GsonBuilder().create().fromJson(json, bookInfoMapTokenType);
+			return fromJson.values().iterator().next();
 		}
 
 	}
