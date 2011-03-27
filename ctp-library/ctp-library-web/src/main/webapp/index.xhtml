@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+   <h:body>
+      <h:form>
+         <h1>
+            Welcome to the ctp library
+         </h1>
+         <div>
+            <h:inputText value="#{libraryBean.searchQuery}"/>
+            <h:commandButton action="#{libraryBean.search}" value="search"/>
+         </div>
+         <table>
+            <ui:repeat value="#{libraryBean.books}" var="book">
+               <tr>
+                  <td>
+                     <h:commandLink action="#{previewBean.selectBook(book.identifiers)}">
+                        <img src="#{book.thumbnailLink.href}" alt="preview book"/>
+                     </h:commandLink>
+                  </td>
+                  <td>
+                     <div>
+                        <h3>
+                        #{book.title.plainText}
+                        </h3>
+                        <ui:repeat value="#{book.creators}" var="author" varStatus="index">
+                        #{author.value}<h:outputText value="," rendered="#{!index.last}"/>
+                        </ui:repeat>
+                        <br/>
+                        <div>
+                           <ui:repeat value="#{book.descriptions}" var="description">
+                              <h:outputText value="#{description.value}" escape="false"/>
+                           </ui:repeat>
+                        </div>
+                        <h:commandLink action="#{libraryBean.checkOut(book.identifiers[1].value)}" value="Check out"/>
+                     </div>
+                  </td>
+               </tr>
+            </ui:repeat>
+         </table>
+      </h:form>
+   </h:body>
+</html>
+

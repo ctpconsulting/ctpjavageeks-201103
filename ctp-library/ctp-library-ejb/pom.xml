@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <parent>
+      <artifactId>ctp-library</artifactId>
+      <groupId>com.ctpconsulting</groupId>
+      <version>1.0-SNAPSHOT</version>
+   </parent>
+   <groupId>com.ctpconsulting</groupId>
+   <artifactId>ctp-library-ejb</artifactId>
+   <packaging>ejb</packaging>
+   <version>1.0-SNAPSHOT</version>
+   <name>ctp-library-ejb Java EE 6 EJB</name>
+   <url>http://maven.apache.org</url>
+   <dependencies>
+
+      <!-- dependency>
+         <groupId>javax</groupId>
+         <artifactId>javaee-api</artifactId>
+         <version>6.0-SNAPSHOT</version>
+         <scope>provided</scope>
+      </dependency -->
+      <dependency>
+         <groupId>org.glassfish.extras</groupId>
+         <artifactId>glassfish-embedded-all</artifactId>
+         <version>3.0-b69</version>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.hibernate</groupId>
+         <artifactId>hibernate-entitymanager</artifactId>
+         <version>3.4.0.GA</version>
+      </dependency>
+
+      <dependency>
+         <groupId>com.google.api</groupId>
+         <artifactId>gdata-books</artifactId>
+         <version>1.0</version>
+      </dependency>
+
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.7</version>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.dbunit</groupId>
+         <artifactId>dbunit</artifactId>
+         <version>2.4.6</version>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-api</artifactId>
+         <version>1.5.5</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-jdk14</artifactId>
+         <version>1.5.5</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.apache.derby</groupId>
+         <artifactId>derby</artifactId>
+         <version>10.5.3.0_1</version>
+         <scope>test</scope>
+      </dependency>
+
+   </dependencies>
+
+   <repositories>
+      <repository>
+         <id>java.net2</id>
+         <name>Java.Net Maven2 Repository, hosts the javaee-api dependency</name>
+         <url>http://download.java.net/maven/2</url>
+      </repository>
+   </repositories>
+
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>2.0.2</version>
+            <configuration>
+               <source>1.6</source>
+               <target>1.6</target>
+               <encoding>${project.build.sourceEncoding}</encoding>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-ejb-plugin</artifactId>
+            <version>2.1</version>
+            <configuration>
+               <ejbVersion>3.1</ejbVersion>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>2.2</version>
+            <configuration>
+               <encoding>${project.build.sourceEncoding}</encoding>
+            </configuration>
+         </plugin>
+      </plugins>
+    <!-- finalName>ctp-library-ejb</finalName -->
+   </build>
+   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <netbeans.hint.deploy.server>gfv3ee6wc</netbeans.hint.deploy.server>
+   </properties>
+</project>
+
