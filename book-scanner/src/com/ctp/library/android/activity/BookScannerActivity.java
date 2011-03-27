@@ -99,12 +99,6 @@ public class BookScannerActivity extends Activity {
 		image = (ImageView) findViewById(R.id.imageView);
 	}
 
-	private BookInfo fetchBook(String scannedInput) {
-		OpenLibraryBookFetcher bookFetcher = new OpenLibraryBookFetcher();
-		BookInfo bookInfo = bookFetcher.fetch(scannedInput);
-		return bookInfo;
-	}
-
 	@Override
 	public Object onRetainNonConfigurationInstance() {
 		if (null != bookInfo) {
