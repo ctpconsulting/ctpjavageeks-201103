@@ -1,13 +1,12 @@
 package com.ctp.library.android.activity;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +17,7 @@ import android.widget.TextView;
 import com.ctp.library.android.R;
 import com.ctp.library.android.domain.BookInfo;
 import com.ctp.library.android.domain.BookInfo.CoverSize;
+import com.ctp.library.android.service.BookFetcher;
 import com.ctp.library.android.service.OpenLibraryBookFetcher;
 
 public class BookScannerActivity extends Activity {
@@ -25,12 +25,18 @@ public class BookScannerActivity extends Activity {
 	private TextView text;
 	
 	private ImageView image;
+	
+	BookFetcher bookFetcher;
+	
+	private BookInfo bookInfo;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		bookFetcher = new OpenLibraryBookFetcher();
 		bindWidgets();
+		restoreIfBookAlreadyFetched();
 
 	}
 
@@ -45,16 +51,31 @@ public class BookScannerActivity extends Activity {
 		if (requestCode == 0) {
 			if (resultCode == RESULT_OK) {
 				String scanResult = intent.getStringExtra("SCAN_RESULT");
-				BookInfo bookInfo = fetchBook(scanResult);
-				text.setText(bookInfo.getTitle());
-				downloadImage(bookInfo.getCoverUrl(CoverSize.MEDIUM));
+				OpenLibraryBookFetcher bookFetcher = new OpenLibraryBookFetcher();
+				bookInfo = bookFetcher.fetch(scanResult);
+				presentBookDetails(bookInfo);
 			} else if (resultCode == RESULT_CANCELED) {
 				text.setText("RESULT CANCELED");
 			}
 		}
 	}
+
+	private void restoreIfBookAlreadyFetched() {
+		Object lastNonConfigurationInstance = getLastNonConfigurationInstance();
+		if (null != lastNonConfigurationInstance) {
+			bookInfo = (BookInfo) lastNonConfigurationInstance;
+			presentBookDetails(bookInfo);
+		}
+	}
 	
-	private void downloadImage(String imageLocation) {
+	private void presentBookDetails(BookInfo bookInfo) {
+		Bitmap coverImage = downloadImage(bookInfo.getCoverUrl(CoverSize.MEDIUM));
+		text.setText(bookInfo.getTitle());
+		image.setImageBitmap(coverImage);
+	}
+	
+	private Bitmap downloadImage(String imageLocation) {
+		Bitmap bitmap = null;
 		HttpURLConnection connection = null;
 		try {
 			URL imageUrl = new URL(imageLocation);
@@ -62,7 +83,7 @@ public class BookScannerActivity extends Activity {
 			connection.setDoInput(true);
 			connection.connect();
 			InputStream is = connection.getInputStream();
-			image.setImageBitmap(BitmapFactory.decodeStream(is));
+			bitmap = BitmapFactory.decodeStream(is);
 		} catch (Exception e) {
 			Log.d("Book-scanner", "Exception while trying to download image from location " + imageLocation, e);
 		} finally {
@@ -70,6 +91,7 @@ public class BookScannerActivity extends Activity {
 				connection.disconnect();
 			}
 		}
+		return bitmap;
 	}
 
 	private void bindWidgets() {
@@ -77,11 +99,18 @@ public class BookScannerActivity extends Activity {
 		image = (ImageView) findViewById(R.id.imageView);
 	}
 
-
 	private BookInfo fetchBook(String scannedInput) {
 		OpenLibraryBookFetcher bookFetcher = new OpenLibraryBookFetcher();
 		BookInfo bookInfo = bookFetcher.fetch(scannedInput);
 		return bookInfo;
 	}
 
+	@Override
+	public Object onRetainNonConfigurationInstance() {
+		if (null != bookInfo) {
+			return bookInfo;
+		}
+		return super.onRetainNonConfigurationInstance();
+	}
 }
+
