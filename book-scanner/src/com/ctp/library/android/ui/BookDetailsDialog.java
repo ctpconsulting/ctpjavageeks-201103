@@ -8,6 +8,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.ctp.library.android.R;
 import com.ctp.library.android.domain.BookInfo;
 import com.ctp.library.android.domain.BookInfo.CoverSize;
+import com.ctp.library.android.ui.util.BookDescriptionCreator;
 
 public class BookDetailsDialog {
 
@@ -41,16 +43,17 @@ public class BookDetailsDialog {
 	}
 
 	public void bindDetails(BookInfo bookInfo) {
-		dialog.setTitle(bookInfo.getTitle());
-		
+		dialog.setTitle("Scaned " + bookInfo.getIsbn());
+
 		TextView text = (TextView) dialog.findViewById(R.id.content);
         ImageView image = (ImageView) dialog.findViewById(R.id.imageView);
         
         Bitmap coverImage = downloadImage(bookInfo.getCoverUrl(CoverSize.MEDIUM));
-        text.setText(bookInfo.getTitle());
         image.setImageBitmap(coverImage);
+        text.setText(new BookDescriptionCreator(bookInfo).create());
+        text.setMovementMethod(LinkMovementMethod.getInstance());
 	}
-	
+
 	public void show() {
 		dialog.show();
 	}

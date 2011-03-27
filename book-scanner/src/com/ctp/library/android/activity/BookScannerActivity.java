@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.ctp.library.android.R;
 import com.ctp.library.android.domain.BookInfo;
@@ -13,8 +12,6 @@ import com.ctp.library.android.service.OpenLibraryBookFetcher;
 import com.ctp.library.android.ui.BookDetailsDialog;
 
 public class BookScannerActivity extends Activity {
-	
-	private TextView text;
 	
 	private BookFetcher bookFetcher;
 	
@@ -37,21 +34,21 @@ public class BookScannerActivity extends Activity {
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-		if (requestCode == 0) {
-			if (resultCode == RESULT_OK) {
-				String scanResult = intent.getStringExtra("SCAN_RESULT");
-				loadBook(scanResult);
-			} else if (resultCode == RESULT_CANCELED) {
-				text.setText("RESULT CANCELED");
-			}
+		if (requestCode != 0) {
+			return;
 		}
+
+		if (resultCode == RESULT_OK) {
+			String scanResult = intent.getStringExtra("SCAN_RESULT");
+			loadBook(scanResult);
+		} 
+		
 	}
 
 	private void loadBook(String isbn) {
 		bookInfo = bookFetcher.fetch(isbn);
 		showBook(bookInfo);
 	}
-
 	
 	private void showBook(BookInfo bookInfo) {
 		BookDetailsDialog bookDetailsDialog = new BookDetailsDialog(BookScannerActivity.this);
