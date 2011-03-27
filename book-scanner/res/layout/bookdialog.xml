@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="wrap_content" android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="fill_parent" 
+			  android:layout_height="fill_parent"
+			  android:orientation="vertical">
 
-	<ImageView android:id="@+id/imageView" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:layout_gravity="center" />
+	<LinearLayout android:layout_width="fill_parent" 
+			  	  android:layout_height="wrap_content">
+		
+		<ImageView android:id="@+id/imageView" 
+				   android:layout_width="100px"
+				   android:layout_height="fill_parent"
+				   android:scaleType="fitStart"
+				   android:padding="4px" />
+	
+		<ScrollView android:id="@+id/bookDetails" 
+					android:layout_width="fill_parent"
+					android:layout_height="fill_parent">
+			<TextView android:id="@+id/content" 
+					  android:layout_width="fill_parent"
+					  android:layout_height="fill_parent" 
+					  android:textSize="11px"
+					  android:padding="4px" />
+		</ScrollView>
+	</LinearLayout>
 
-	<ScrollView android:id="@+id/bookDetails" 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
-		<TextView android:id="@+id/content" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:padding="5px" />
-	</ScrollView>
-
-	 <Button android:id="@+id/closeBookDetailsButton" android:layout_below="@id/bookDetails"
-	 android:layout_width="wrap_content" android:layout_height="wrap_content"
-	 android:layout_centerHorizontal="true" android:text="Ok" />
-
-
-</RelativeLayout>
+	<Button android:id="@+id/closeBookDetailsButton" 
+     		android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+			android:layout_centerHorizontal="true"
+			android:layout_gravity="center" 
+			android:text="Ok" />
+</LinearLayout>
