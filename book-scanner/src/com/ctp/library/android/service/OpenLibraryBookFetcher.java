@@ -2,6 +2,7 @@ package com.ctp.library.android.service;
 
 import java.lang.reflect.Type;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ResponseHandler;
@@ -30,7 +31,7 @@ public class OpenLibraryBookFetcher implements BookFetcher {
 			HttpResponse response = client.execute(get);
 			ResponseHandler<String> responseHandler = new BasicResponseHandler();
 			if (200 == response.getStatusLine().getStatusCode()) {
-				result = BookInfoResponse.fromJSON(responseHandler.handleResponse(response));
+				result = fromJSON(responseHandler.handleResponse(response));
 			}
 		} catch (Exception e) {
 			Log.d("OpenLibraryBookFetcher", "Exception has been thrown", e);
@@ -39,26 +40,13 @@ public class OpenLibraryBookFetcher implements BookFetcher {
 	}
 	
 	
-	private static final class BookInfoResponse extends JSONObject {
-
-		private final String isbn;
-
-		public BookInfoResponse(String response) throws JSONException {
-			super(response);
-			this.isbn = extractISBN(); 
-		}
-
-		private String extractISBN() {
-			String isbnKey = (String) keys().next();
-			return isbnKey.substring(isbnKey.indexOf(":") + 1);
-		}
-
-		public static BookInfo fromJSON(String json) throws JSONException {
-			Type bookInfoMapTokenType = new TypeToken<Map<String,BookInfo>>() {}.getType();
-			Map<String,BookInfo> fromJson = new GsonBuilder().create().fromJson(json, bookInfoMapTokenType);
-			return fromJson.values().iterator().next();
-		}
-
+	public static BookInfo fromJSON(String json) throws JSONException {
+		Type bookInfoMapTokenType = new TypeToken<Map<String,BookInfo>>() {}.getType();
+		Map<String,BookInfo> fromJson = new GsonBuilder().create().fromJson(json, bookInfoMapTokenType);
+		Entry<String, BookInfo> firstBookEntry = fromJson.entrySet().iterator().next();
+		BookInfo bookInfo = firstBookEntry.getValue();
+		bookInfo.setIsbn(firstBookEntry.getKey());
+		return bookInfo;
 	}
 
 }
